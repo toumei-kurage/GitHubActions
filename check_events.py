@@ -42,15 +42,6 @@ def main():
 
         browser.close()
 
-    # 【テスト用】現在イベントがなくても動作確認できるようダミーを注入
-    # ※疎通テスト完了後は下の2行を削除して本来の判定に戻してください
-    if not matched_events:
-        matched_events = [{
-            "title": "【テスト通知】DP-900 監視テスト",
-            "link": MVTD_URL,
-            "snippet": "GitHub ActionsからのIssue起票・メール通知テストです。"
-        }]
-
     if matched_events:
         print(f"Found {len(matched_events)} matching event(s). Generating report...")
         with open("result.md", "w", encoding="utf-8") as f:
