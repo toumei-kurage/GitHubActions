@@ -2,7 +2,7 @@ import sys
 from playwright.sync_api import sync_playwright
 
 MVTD_URL = "https://events.microsoft.com/en-us/mvtd"
-TARGET_KEYWORDS = ["Data Fundamentals", "データの基礎"]
+TARGET_KEYWORDS = ["Data Fundamentals", "データの基礎", "Azure Data", "Introduction to Microsoft Azure Data"]
 
 
 def main():
