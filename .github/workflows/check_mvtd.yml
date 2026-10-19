@@ -4,8 +4,10 @@ on:
   schedule:
     # 毎日 UTC 00:00（JST 09:00）に定期実行
     - cron: '0 0 * * *'
-  # 手動実行用トリガー
   workflow_dispatch:
+
+permissions:
+  issues: write # Issueを作成するための権限
 
 jobs:
   check-events:
@@ -28,8 +30,14 @@ jobs:
           playwright install --with-deps chromium
 
       - name: Run Event Checker
-        env:
-          GMAIL_USER: ${{ secrets.GMAIL_USER }}
-          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
         run: |
           python check_events.py
+
+      - name: Create Issue if Events Found
+        if: hashFiles('result.md') != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create \
+            --title "【DP-900 割引検知】Virtual Training Day が見つかりました" \
+            --body-file result.md
