@@ -45,11 +45,8 @@ def send_email(matched_events: list[dict]) -> None:
     msg["To"] = GMAIL_USER
 
     try:
-        # GmailのSMTPサーバー（ポート587 / TLS）に接続
-        with smtplib.SMTP("smtp.gmail.com", 587) as server:
-            server.ehlo()
-            server.starttls()
-            server.ehlo()
+        # ポート465（SSL直接接続）を使用
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=20) as server:
             server.login(GMAIL_USER, GMAIL_APP_PASSWORD)
             server.send_message(msg)
         print("Notification email sent successfully.")
