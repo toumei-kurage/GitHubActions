@@ -95,11 +95,16 @@ def main():
 
         browser.close()
 
-    if matched_events:
-        print(f"Found {len(matched_events)} matching event(s). Sending email...")
-        send_email(matched_events)
-    else:
-        print("No matching DP-900 events found today.")
+    # テスト用にダミーデータを作成して強制送信
+    test_events = matched_events if matched_events else [
+        {
+            "title": "【テスト送信】DP-900 監視通知テスト",
+            "link": MVTD_URL,
+            "snippet": "これはメール疎通テストです。GitHub Actionsからの通知が正常に届いています。",
+        }
+    ]
+    print("Sending test email...")
+    send_email(test_events)
 
 
 if __name__ == "__main__":
