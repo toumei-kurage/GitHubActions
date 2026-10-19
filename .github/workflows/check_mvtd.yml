@@ -40,5 +40,4 @@ jobs:
         run: |
           gh issue create \
             --title "【DP-900 割引検知】Virtual Training Day が見つかりました" \
-            --body-file result.md \
-            --assignee "@me"
+            --body-file result.md

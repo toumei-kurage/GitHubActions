@@ -54,6 +54,7 @@ def main():
     if matched_events:
         print(f"Found {len(matched_events)} matching event(s). Generating report...")
         with open("result.md", "w", encoding="utf-8") as f:
+            f.write("@toumei-kurage\n\n")  # メンション通知用
             f.write("## 🔔 DP-900 割引対象の可能性があるトレーニングが見つかりました\n\n")
             f.write(f"- カタログ一覧: {MVTD_URL}\n\n")
             f.write("---\n\n")
